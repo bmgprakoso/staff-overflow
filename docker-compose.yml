@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  # Frontend application
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    depends_on:
+      - json-server-1
+      - json-server-2
+    networks:
+      - app-network
+
+  # JSON Server 1
+  json-server-1:
+    image: clue/json-server
+    ports:
+      - "4001:80"
+    volumes:
+      - ./db-step1.json:/data/db.json
+    networks:
+      - app-network
+
+  # JSON Server 2
+  json-server-2:
+    image: clue/json-server
+    ports:
+      - "4002:80"
+    volumes:
+      - ./db-step2.json:/data/db.json
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
