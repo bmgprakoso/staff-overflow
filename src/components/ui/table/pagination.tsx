@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { Button } from "../button";
-import { Select } from "../form/select";
 import { DefaultPage, LimitOptions } from "@/config/table";
+import { Select } from "../form";
 
 type Props = {
   page: number;
