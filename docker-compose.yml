@@ -1,20 +1,21 @@
 version: "3.8"
 
 services:
-  # Frontend application
   frontend:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - "4000:4000"
+    environment:
+      - VITE_JSON_SERVER_1=http://localhost:4001
+      - VITE_JSON_SERVER_2=http://localhost:4002
     depends_on:
       - json-server-1
       - json-server-2
     networks:
       - app-network
 
-  # JSON Server 1
   json-server-1:
     image: clue/json-server
     ports:
@@ -24,7 +25,6 @@ services:
     networks:
       - app-network
 
-  # JSON Server 2
   json-server-2:
     image: clue/json-server
     ports:

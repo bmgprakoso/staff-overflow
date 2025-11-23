@@ -1,12 +1,21 @@
 import { Label, Input } from "@/components/ui/form";
 import { Grid, GridItem } from "@/components/ui/grid";
+import { useDepartments } from "../api/get-departments";
 
 export const BasicInfoStep = () => {
+  const departmentsQuery = useDepartments({
+    page: 1,
+    limit: 10,
+  });
+
+  const departments = departmentsQuery.data || [];
+  console.log(departments);
+
   return (
     <div>
       <Grid cols={2}>
         <GridItem>
-          <Label htmlFor="full_name">Full Name</Label>
+          <Label htmlFor="full_name">Full Senyum</Label>
           <Input id="full_name" type="text" />
         </GridItem>
 
