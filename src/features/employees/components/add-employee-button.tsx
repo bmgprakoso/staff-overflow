@@ -1,8 +1,7 @@
 import { SplitButton } from "@/components/ui/button";
+import type { Role } from "@/config/role";
 import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-
-type Role = "admin" | "ops";
 
 const buttonLabelMap: Record<Role, string> = {
   admin: "Add Admin Employee",
