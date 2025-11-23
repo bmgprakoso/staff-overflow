@@ -4,5 +4,14 @@
     { "id": 2, "name": "Depok" },
     { "id": 3, "name": "Surabaya" }
   ],
-  "details": []
+  "details": [
+    {
+      "id": 1,
+      "employee_id": "ENG-001",
+      "photo": "https://via.placeholder.com/150",
+      "employment_type": "Full-time",
+      "office_location": "Jakarta",
+      "notes": "lorem ipsum"
+    }
+  ]
 }

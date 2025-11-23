@@ -6,9 +6,17 @@ type Props = {
   label: string;
   placeholder?: string;
   type?: string;
+  required?: boolean;
+  disabled?: boolean;
 };
 
-export function TextField({ label, placeholder, type = "text" }: Props) {
+export function TextField({
+  label,
+  placeholder,
+  type = "text",
+  required,
+  disabled,
+}: Props) {
   const { value, onChange, onBlur, hasError, errorText } = useFieldUIState<
     string | number | undefined
   >();
@@ -26,13 +34,17 @@ export function TextField({ label, placeholder, type = "text" }: Props) {
 
   return (
     <>
-      <Label>{label}</Label>
+      <Label>
+        {label}
+        {required && <span style={{ color: "red" }}> *</span>}
+      </Label>
       <Input
         placeholder={placeholder}
         type={type}
         value={value}
         onChange={handleChange}
         onBlur={onBlur}
+        disabled={disabled}
       />
       {hasError && <HelperText error={hasError}>{errorText}</HelperText>}
     </>

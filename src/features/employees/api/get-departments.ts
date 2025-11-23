@@ -1,6 +1,6 @@
 import { queryOptions, useQuery } from "@tanstack/react-query";
 
-import { api } from "@/lib/api-client";
+import { api1 } from "@/lib/api-client";
 import type { QueryConfig } from "@/lib/react-query";
 import type { Department } from "@/types/api";
 import { apiRoutes } from "@/config/api-routes";
@@ -11,7 +11,7 @@ export const getDepartments = (
   limit = DefaultPageSize,
   q?: string,
 ): Promise<Department[]> => {
-  return api.get(apiRoutes.departments.list, {
+  return api1.get(apiRoutes.departments.list, {
     params: {
       _page: page,
       _limit: limit,

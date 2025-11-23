@@ -8,4 +8,6 @@ const crudRoutes = (resource: string) => {
 
 export const apiRoutes = {
   departments: crudRoutes("departments"),
+  basicInfo: crudRoutes("basicInfo"),
+  details: crudRoutes("details"),
 } as const;

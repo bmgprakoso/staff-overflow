@@ -1,36 +1,58 @@
-import { Label, Input } from "@/components/ui/form";
+import { Label } from "@/components/ui/form";
 import { Grid, GridItem } from "@/components/ui/grid";
 import { DepartmentAutocomplete } from "./department-autocomplete";
+import { withForm } from "@/forms";
+import { formOpts } from "../data/shared-form";
+import { EmployeeIdField } from "./employee-id-field";
 
-export const BasicInfoStep = () => {
-  return (
-    <div>
-      <Grid cols={2}>
-        <GridItem>
-          <Label htmlFor="full_name">Full Name</Label>
-          <Input id="full_name" type="text" />
-        </GridItem>
+export const BasicInfoStep = withForm({
+  ...formOpts,
+  render: function Render({ form }) {
+    return (
+      <div>
+        <Grid cols={2}>
+          <GridItem>
+            <form.AppField
+              name="full_name"
+              children={(field) => (
+                <field.TextField label="Full Name" type="text" required />
+              )}
+            />
+          </GridItem>
 
-        <GridItem>
-          <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" />
-        </GridItem>
+          <GridItem>
+            <form.AppField
+              name="email"
+              children={(field) => (
+                <field.TextField label="Email" type="email" required />
+              )}
+            />
+          </GridItem>
 
-        <GridItem>
-          <Label htmlFor="department">Department</Label>
-          <DepartmentAutocomplete />
-        </GridItem>
+          <GridItem>
+            <Label htmlFor="department">Department</Label>
+            <DepartmentAutocomplete />
+          </GridItem>
 
-        <GridItem>
-          <Label htmlFor="role">Role</Label>
-          <Input id="role" type="text" />
-        </GridItem>
+          <GridItem>
+            <form.AppField
+              name="role"
+              children={(field) => (
+                <field.SelectField
+                  label="Role"
+                  placeholder="Select Role"
+                  options={["Ops", "Admin", "Engineer", "Finance"]}
+                  required
+                />
+              )}
+            />
+          </GridItem>
 
-        <GridItem>
-          <Label htmlFor="employee_id">Employee ID</Label>
-          <Input id="employee_id" type="text" disabled />
-        </GridItem>
-      </Grid>
-    </div>
-  );
-};
+          <GridItem>
+            <EmployeeIdField form={form} />
+          </GridItem>
+        </Grid>
+      </div>
+    );
+  },
+});

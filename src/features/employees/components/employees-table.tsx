@@ -1,10 +1,19 @@
 import { Table, Th, Td, Pagination } from "@/components/ui/table";
 import { DefaultPage, DefaultPageSize } from "@/config/table";
 import { useState } from "react";
+import { useEmployees } from "../api/get-employees";
 
 export const EmployeesTable = () => {
   const [page, setPage] = useState(DefaultPage);
   const [limit, setLimit] = useState(DefaultPageSize);
+
+  const employeesQuery = useEmployees({
+    page,
+    limit,
+  });
+
+  const employees = employeesQuery.data || [];
+  console.log(employees);
 
   const totalRows = 48; // example
 

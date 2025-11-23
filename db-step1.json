@@ -5,5 +5,13 @@
     { "id": 3, "name": "Operations" },
     { "id": 4, "name": "Engineering" }
   ],
-  "basicInfo": []
+  "basicInfo": [
+    {
+      "id": "ENG-001",
+      "full_name": "Dave Gamache",
+      "email": "dave@example.com",
+      "department": "Engineering",
+      "role": "Engineer"
+    }
+  ]
 }
