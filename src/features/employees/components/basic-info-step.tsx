@@ -1,17 +1,8 @@
 import { Label, Input } from "@/components/ui/form";
 import { Grid, GridItem } from "@/components/ui/grid";
-import { useDepartments } from "../api/get-departments";
 import { DepartmentAutocomplete } from "./department-autocomplete";
 
 export const BasicInfoStep = () => {
-  const departmentsQuery = useDepartments({
-    page: 1,
-    limit: 10,
-  });
-
-  const departments = departmentsQuery.data || [];
-  console.log(departments);
-
   return (
     <div>
       <Grid cols={2}>

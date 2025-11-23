@@ -23,7 +23,6 @@ const Input = styled.input`
 const AutocompleteContainer = styled.div`
   position: relative;
   width: 100%;
-  max-width: 400px;
 `;
 
 const DropdownList = styled.ul`
@@ -57,7 +56,7 @@ const DropdownItem = styled.li<DropdownItemProps>`
   }
 `;
 
-type Option = {
+export type Option = {
   id: number;
   name: string;
 };

@@ -1,33 +1,33 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
 import { Autocomplete, type Option } from "@/components/ui/form/autocomplete";
+import { useDepartments } from "../api/get-departments";
 
-const sampleOptions: Option[] = [
-  { id: 1, name: "Apple" },
-  { id: 2, name: "Banana" },
-  { id: 3, name: "Cherry" },
-  { id: 4, name: "Date" },
-  { id: 5, name: "Elderberry" },
-  { id: 6, name: "Fig" },
-  { id: 7, name: "Grape" },
-  { id: 8, name: "Honeydew" },
-  { id: 9, name: "Kiwi" },
-  { id: 10, name: "Lemon" },
-  { id: 11, name: "Mango" },
-  { id: 12, name: "Orange" },
-  { id: 13, name: "Papaya" },
-  { id: 14, name: "Raspberry" },
-  { id: 15, name: "Strawberry" },
-  { id: 16, name: "Watermelon" },
-];
+const DebounceMs = 500;
 
 export const DepartmentAutocomplete = () => {
   const [inputValue, setInputValue] = useState<string>("");
+  const [debouncedValue, setDebouncedValue] = useState<string>("");
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
-  const [options, setOptions] = useState<Option[]>(sampleOptions);
+
+  // Debounce the input value
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedValue(inputValue);
+    }, DebounceMs);
+
+    return () => clearTimeout(timer);
+  }, [inputValue]);
+
+  const departmentsQuery = useDepartments({
+    page: 1,
+    limit: 10,
+    query: debouncedValue,
+  });
+
+  const options = departmentsQuery.data || [];
 
   const handleChange = (value: string, option: Option | null): void => {
-    // Only update input for filtering purposes
+    // Update input immediately for responsive UI
     setInputValue(value);
 
     // Clear selected option if user is typing (not a valid selection)
@@ -50,6 +50,9 @@ export const DepartmentAutocomplete = () => {
         onChange={handleChange}
         onSelect={handleSelect}
       />
+
+      {/* Optional: Show loading state */}
+      {departmentsQuery.isLoading && <p>Loading...</p>}
 
       {/* Only show selected when it's a valid option */}
       {selectedOption && (

@@ -15,7 +15,7 @@ export const getDepartments = (
     params: {
       _page: page,
       _limit: limit,
-      ...(q && { q }),
+      ...(q && { name_like: q }),
     },
   });
 };
