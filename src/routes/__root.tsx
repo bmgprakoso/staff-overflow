@@ -1,18 +1,11 @@
-import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
+import { Container } from "@/components/ui/container";
+import { createRootRoute, Outlet } from "@tanstack/react-router";
 
 const RootLayout = () => (
-  <>
-    <div className="p-2 flex gap-2">
-      <Link to="/" className="[&.active]:font-bold">
-        Home
-      </Link>{" "}
-      <Link to="/wizard" className="[&.active]:font-bold">
-        Wizard
-      </Link>
-    </div>
-    <hr />
+  <Container style={{ marginTop: "2.5rem" }}>
+    <h1>Staff Overflow</h1>
     <Outlet />
-  </>
+  </Container>
 );
 
 export const Route = createRootRoute({ component: RootLayout });
