@@ -1,6 +1,7 @@
 import { Label, Input } from "@/components/ui/form";
 import { Grid, GridItem } from "@/components/ui/grid";
 import { useDepartments } from "../api/get-departments";
+import { DepartmentAutocomplete } from "./department-autocomplete";
 
 export const BasicInfoStep = () => {
   const departmentsQuery = useDepartments({
@@ -15,7 +16,7 @@ export const BasicInfoStep = () => {
     <div>
       <Grid cols={2}>
         <GridItem>
-          <Label htmlFor="full_name">Full Senyum</Label>
+          <Label htmlFor="full_name">Full Name</Label>
           <Input id="full_name" type="text" />
         </GridItem>
 
@@ -26,7 +27,7 @@ export const BasicInfoStep = () => {
 
         <GridItem>
           <Label htmlFor="department">Department</Label>
-          <Input id="department" type="text" />
+          <DepartmentAutocomplete />
         </GridItem>
 
         <GridItem>
