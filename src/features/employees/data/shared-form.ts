@@ -4,9 +4,9 @@ import { employeeSchema, type EmployeeSchema } from "./employee-schema";
 export const defaultValues: EmployeeSchema = {
   full_name: "",
   email: "",
-  department: "",
+  department: null,
   role: "",
-  id: "",
+  employee_id: "",
 };
 
 export const formOpts = formOptions({

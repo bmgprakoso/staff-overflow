@@ -6,7 +6,7 @@ export const EmployeeIdField = withForm({
   render: function Render({ form }) {
     return (
       <form.AppField
-        name="id"
+        name="employee_id"
         children={(field) => (
           <field.TextField label="Employee ID" type="text" required disabled />
         )}

@@ -2,7 +2,7 @@ import { queryOptions, useQuery } from "@tanstack/react-query";
 
 import { api1, api2 } from "@/lib/api-client";
 import type { QueryConfig } from "@/lib/react-query";
-import type { BasicInfo, Employee } from "@/types/api";
+import type { BasicInfo, Employees } from "@/types/api";
 import { apiRoutes } from "@/config/api-routes";
 import { DefaultPage, DefaultPageSize } from "@/config/table";
 
@@ -10,8 +10,8 @@ export const getEmployees = async (
   page = DefaultPage,
   limit = DefaultPageSize,
   role?: string,
-): Promise<Employee[]> => {
-  const basicInfo = await api1.get(apiRoutes.basicInfo.list, {
+): Promise<Employees> => {
+  const basicInfos = await api1.get(apiRoutes.basicInfo.list, {
     params: {
       _page: page,
       _limit: limit,
@@ -20,7 +20,7 @@ export const getEmployees = async (
   });
 
   const employeeIds: string[] =
-    basicInfo?.map((info: BasicInfo) => info.id) || [];
+    basicInfos.data?.map((info: BasicInfo) => info.employee_id) || [];
 
   const details = await api2.get(apiRoutes.details.list, {
     params: {
@@ -28,10 +28,14 @@ export const getEmployees = async (
     },
   });
 
-  return basicInfo?.map((info: BasicInfo, index: number) => ({
-    ...info,
-    ...details?.[index],
-  }));
+  return {
+    employees: basicInfos.data?.map((info: BasicInfo, index: number) => ({
+      ...info,
+      ...details.data?.[index],
+    })),
+    page,
+    total: Number(basicInfos.headers["x-total-count"]),
+  };
 };
 
 export const getEmployeesQueryOptions = ({

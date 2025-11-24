@@ -4,6 +4,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { EmployeeForm } from "../components/employee-form";
 import type { EmployeeSchema } from "../data/employee-schema";
 import { useCreateEmployee } from "../api/create-employee";
+import type { Role } from "@/config/role";
 
 export const CreateEmployee = () => {
   const { role } = Route.useSearch();
@@ -29,7 +30,7 @@ export const CreateEmployee = () => {
     <div>
       <Button onClick={onBack}>Back</Button>
       <h2>{`Add ${role} Employee`}</h2>
-      <EmployeeForm onSubmit={onSubmit} />
+      <EmployeeForm as={role as Role} onSubmit={onSubmit} />
     </div>
   );
 };

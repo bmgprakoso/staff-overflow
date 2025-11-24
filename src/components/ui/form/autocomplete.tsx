@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
 import styled from "@emotion/styled";
 
 const Input = styled.input`
@@ -76,11 +76,19 @@ export const Autocomplete = ({
   onChange,
   onSelect,
 }: Props) => {
-  const [filteredOptions, setFilteredOptions] = useState<Option[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [highlightedIndex, setHighlightedIndex] = useState<number>(-1);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const filteredOptions = useMemo(() => {
+    if (value.trim()) {
+      return options.filter((option) =>
+        option.name.toLowerCase().includes(value.toLowerCase()),
+      );
+    }
+    return options;
+  }, [options, value]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent): void => {
@@ -99,33 +107,20 @@ export const Autocomplete = ({
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const newValue = e.target.value;
 
-    if (newValue.trim()) {
-      const filtered = options.filter((option) =>
-        option.name.toLowerCase().includes(newValue.toLowerCase()),
-      );
-      setFilteredOptions(filtered);
-      setIsOpen(filtered.length > 0);
-      setHighlightedIndex(-1);
-    } else {
-      // Show all options when input is empty
-      setFilteredOptions(options);
-      setIsOpen(options.length > 0);
-    }
+    setIsOpen(filteredOptions.length > 0 || newValue.trim() === "");
+    setHighlightedIndex(-1);
 
     onChange(newValue, null);
   };
 
   const handleInputFocus = (): void => {
-    // Show all options when user focuses on input
-    if (!value.trim() && options.length > 0) {
-      setFilteredOptions(options);
+    if (filteredOptions.length > 0) {
       setIsOpen(true);
     }
   };
 
   const handleOptionClick = (option: Option): void => {
     setIsOpen(false);
-    setFilteredOptions([]);
 
     onChange(option.name, option);
 

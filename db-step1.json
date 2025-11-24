@@ -7,7 +7,8 @@
   ],
   "basicInfo": [
     {
-      "id": "ENG-001",
+      "id": 1,
+      "employee_id": "ENG-001",
       "full_name": "Dave Gamache",
       "email": "dave@example.com",
       "department": "Engineering",

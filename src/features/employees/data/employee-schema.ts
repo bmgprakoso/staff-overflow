@@ -1,15 +1,20 @@
 import { requiredString, emailValidator } from "@/lib/validation/validators";
 import * as v from "valibot";
 
+const optionSchema = v.object({
+  id: v.number(),
+  name: v.string(),
+});
+
 export const employeeSchema = v.object({
   full_name: requiredString,
   email: emailValidator,
-  department: requiredString,
+  department: v.nullable(optionSchema),
   role: requiredString,
-  id: requiredString,
+  employee_id: requiredString,
   photo: v.optional(v.string()),
   employment_type: v.optional(v.string()),
-  office_location: v.optional(v.string()),
+  office_location: v.optional(optionSchema),
   notes: v.optional(v.string()),
 });
 

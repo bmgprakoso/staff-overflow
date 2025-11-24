@@ -55,7 +55,6 @@ const MenuItem = styled.li`
   }
 `;
 
-// ============= Component =============
 export const SplitButton = ({
   primary,
   label,

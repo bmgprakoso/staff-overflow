@@ -12,10 +12,8 @@ export const EmployeesTable = () => {
     limit,
   });
 
-  const employees = employeesQuery.data || [];
-  console.log(employees);
-
-  const totalRows = 48; // example
+  const employees = employeesQuery.data?.employees || [];
+  const total = employeesQuery.data?.total || 0;
 
   return (
     <div>
@@ -30,19 +28,21 @@ export const EmployeesTable = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <Td>Dave Gamache</Td>
-            <Td>Lending</Td>
-            <Td>Admin</Td>
-            <Td>Jakarta</Td>
-            <Td>Photo</Td>
-          </tr>
+          {employees.map((employee) => (
+            <tr key={employee.id}>
+              <Td>{employee.full_name}</Td>
+              <Td>{employee.department}</Td>
+              <Td>{employee.role}</Td>
+              <Td>{employee.office_location}</Td>
+              <Td>{employee.photo}</Td>
+            </tr>
+          ))}
         </tbody>
       </Table>
       <Pagination
         page={page}
         limit={limit}
-        total={totalRows}
+        total={total}
         onChangePage={setPage}
         onChangeLimit={setLimit}
       />

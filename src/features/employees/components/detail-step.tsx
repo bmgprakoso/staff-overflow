@@ -1,10 +1,11 @@
+import { Label } from "@/components/ui/form";
 import { Grid, GridItem } from "@/components/ui/grid";
+import { DepartmentAutocomplete } from "./department-autocomplete";
 import { withForm } from "@/forms";
 import { formOpts } from "../data/shared-form";
 import { EmployeeIdField } from "./employee-id-field";
-import { useDepartments } from "../api/get-departments";
 
-export const BasicInfoStep = withForm({
+export const DetailStep = withForm({
   ...formOpts,
   render: function Render({ form }) {
     return (
@@ -29,17 +30,8 @@ export const BasicInfoStep = withForm({
           </GridItem>
 
           <GridItem>
-            <form.AppField
-              name="department"
-              children={(field) => (
-                <field.AutocompleteField
-                  label="Department"
-                  useQuery={useDepartments}
-                  placeholder="Search departments..."
-                  required
-                />
-              )}
-            />
+            <Label htmlFor="department">Department</Label>
+            <DepartmentAutocomplete />
           </GridItem>
 
           <GridItem>

@@ -10,9 +10,20 @@ export function SubmitButton({ label, loadingLabel = "Submitting..." }: Props) {
   const form = useFormContext();
 
   return (
-    <form.Subscribe selector={(state) => state.isSubmitting}>
-      {(isSubmitting) => (
-        <Button primary type="submit" disabled={isSubmitting}>
+    <form.Subscribe
+      selector={(state) => ({
+        isSubmitting: state.isSubmitting,
+        isValid: state.isValid,
+        isDirty: state.isDirty,
+      })}
+    >
+      {({ isSubmitting, isValid, isDirty }) => (
+        <Button
+          primary
+          type="submit"
+          disabled={isSubmitting || !isValid || !isDirty}
+          style={{ marginBottom: 0 }}
+        >
           {isSubmitting ? loadingLabel : label}
         </Button>
       )}

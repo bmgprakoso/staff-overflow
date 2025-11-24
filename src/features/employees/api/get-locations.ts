@@ -1,17 +1,17 @@
 import { queryOptions, useQuery } from "@tanstack/react-query";
 
-import { api1 } from "@/lib/api-client";
+import { api2 } from "@/lib/api-client";
 import type { QueryConfig } from "@/lib/react-query";
-import type { Department } from "@/types/api";
+import type { Location } from "@/types/api";
 import { apiRoutes } from "@/config/api-routes";
 import { DefaultPage, DefaultPageSize } from "@/config/table";
 
-export const getDepartments = async (
+export const getLocations = async (
   page = DefaultPage,
   limit = DefaultPageSize,
   q?: string,
-): Promise<Department[]> => {
-  const response = await api1.get(apiRoutes.departments.list, {
+): Promise<Location[]> => {
+  const response = await api2.get(apiRoutes.locations.list, {
     params: {
       _page: page,
       _limit: limit,
@@ -22,32 +22,32 @@ export const getDepartments = async (
   return response.data;
 };
 
-export const getDepartmentsQueryOptions = ({
+export const getLocationsQueryOptions = ({
   page = DefaultPage,
   limit = DefaultPageSize,
   query,
 }: { page?: number; limit?: number; query?: string } = {}) => {
   return queryOptions({
-    queryKey: ["departments", { page, limit, query }],
-    queryFn: () => getDepartments(page, limit, query),
+    queryKey: ["locations", { page, limit, query }],
+    queryFn: () => getLocations(page, limit, query),
   });
 };
 
-type UseDepartmentsOptions = {
+type UseLocationsOptions = {
   page?: number;
   limit?: number;
   query?: string;
-  queryConfig?: QueryConfig<typeof getDepartmentsQueryOptions>;
+  queryConfig?: QueryConfig<typeof getLocationsQueryOptions>;
 };
 
-export const useDepartments = ({
+export const useLocations = ({
   page,
   limit,
   query,
   queryConfig,
-}: UseDepartmentsOptions) => {
+}: UseLocationsOptions) => {
   return useQuery({
-    ...getDepartmentsQueryOptions({ page, limit, query }),
+    ...getLocationsQueryOptions({ page, limit, query }),
     ...queryConfig,
   });
 };
