@@ -19,6 +19,6 @@ docker-compose up -d
 
 ## Hosted demo Url
 
-[Netlify](https://effortless-paprenjak-f0e4f4.netlify.app/)
+Coming soon
 
 ## Testing Notes

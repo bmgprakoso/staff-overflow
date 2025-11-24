@@ -91,6 +91,7 @@ export const EmployeeForm = ({ as, defaultValues, onSubmit }: Props) => {
     }
   };
 
+  // Debounced auto-save effect
   useEffect(() => {
     if (!isDirty) return;
 
