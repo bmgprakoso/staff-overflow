@@ -11,6 +11,13 @@ export const DetailStep = withForm({
         <Grid cols={2}>
           <GridItem>
             <form.AppField
+              name="photo"
+              children={(field) => <field.ImageField label="Photo" />}
+            />
+          </GridItem>
+
+          <GridItem>
+            <form.AppField
               name="employment_type"
               children={(field) => (
                 <field.SelectField

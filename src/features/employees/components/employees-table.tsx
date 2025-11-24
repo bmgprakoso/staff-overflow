@@ -2,6 +2,7 @@ import { Table, Th, Td, Pagination } from "@/components/ui/table";
 import { DefaultPage, DefaultPageSize } from "@/config/table";
 import { useState } from "react";
 import { useEmployees } from "../api/get-employees";
+import { Image } from "@/components/ui/image";
 
 export const EmployeesTable = () => {
   const [page, setPage] = useState(DefaultPage);
@@ -34,7 +35,13 @@ export const EmployeesTable = () => {
               <Td>{employee.department.name}</Td>
               <Td>{employee.role}</Td>
               <Td>{employee.office_location?.name || "N/A"}</Td>
-              <Td>{employee.photo || "N/A"}</Td>
+              <Td>
+                {employee.photo ? (
+                  <Image src={employee.photo} maxHeight="100px" />
+                ) : (
+                  "N/A"
+                )}
+              </Td>
             </tr>
           ))}
         </tbody>

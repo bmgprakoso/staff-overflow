@@ -5,6 +5,7 @@ import {
   SelectField,
   AutocompleteField,
   TextareaField,
+  ImageField,
 } from "@/forms/fields";
 
 export const { useAppForm, withForm } = createFormHook({
@@ -13,6 +14,7 @@ export const { useAppForm, withForm } = createFormHook({
     SelectField,
     AutocompleteField,
     TextareaField,
+    ImageField,
   },
   formComponents: {
     SubmitButton,

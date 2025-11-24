@@ -12,7 +12,6 @@ type Props = {
     query: string;
   }) => UseQueryResult<Option[]>;
   placeholder?: string;
-  showSelection?: boolean;
   debounceMs?: number;
   value: Option | null;
   onChange: (option: Option | null) => void;
@@ -21,7 +20,6 @@ type Props = {
 export const ResourceAutocomplete = ({
   useQuery,
   placeholder,
-  showSelection = false,
   debounceMs = DebounceMs,
   value,
   onChange,
@@ -82,53 +80,6 @@ export const ResourceAutocomplete = ({
         onSelect={handleSelect}
         placeholder={placeholder}
       />
-
-      {/* Optional: Show loading state */}
-      {query.isLoading && <p>Loading...</p>}
-
-      {/* Only show selected when it's a valid option */}
-      {showSelection && value && (
-        <div>
-          <p>Valid Selection:</p>
-          <p>ID: {value.id}</p>
-          <p>Name: {value.name}</p>
-        </div>
-      )}
     </div>
   );
 };
-
-// Usage examples with TanStack Form:
-//
-// <form.Field name="location">
-//   {(field) => (
-//     <ResourceAutocomplete
-//       useQuery={useLocations}
-//       placeholder="Search locations..."
-//       value={field.state.value}
-//       onChange={(option) => field.handleChange(option)}
-//     />
-//   )}
-// </form.Field>
-//
-// <form.Field name="department">
-//   {(field) => (
-//     <ResourceAutocomplete
-//       useQuery={useDepartments}
-//       placeholder="Search departments..."
-//       value={field.state.value}
-//       onChange={(option) => field.handleChange(option)}
-//       showSelection
-//     />
-//   )}
-// </form.Field>
-//
-// Or with plain React state:
-// const [location, setLocation] = useState<Option | null>(null);
-//
-// <ResourceAutocomplete
-//   useQuery={useLocations}
-//   placeholder="Search locations..."
-//   value={location}
-//   onChange={setLocation}
-// />

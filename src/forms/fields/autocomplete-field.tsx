@@ -45,7 +45,6 @@ export const AutocompleteField = ({
         placeholder={placeholder}
         value={value ?? null}
         onChange={handleChange}
-        showSelection
       />
       {hasError && <HelperText error={hasError}>{errorText}</HelperText>}
     </>
