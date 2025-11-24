@@ -122,19 +122,6 @@ export const EmployeeForm = ({ as, defaultValues, onSubmit }: Props) => {
 
   return (
     <div>
-      {lastSaved && (
-        <div
-          style={{
-            fontSize: "12px",
-            color: "#666",
-            marginBottom: "8px",
-            textAlign: "right",
-          }}
-        >
-          Draft saved at {lastSaved.toLocaleTimeString()}
-        </div>
-      )}
-
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -146,6 +133,8 @@ export const EmployeeForm = ({ as, defaultValues, onSubmit }: Props) => {
         {step === 1 && <BasicInfoStep form={form} />}
         {step === 2 && <DetailStep form={form} />}
 
+        {lastSaved && <h6>Draft saved at {lastSaved.toLocaleTimeString()}</h6>}
+
         <div
           style={{
             display: "flex",
@@ -154,6 +143,16 @@ export const EmployeeForm = ({ as, defaultValues, onSubmit }: Props) => {
             gap: "16px",
           }}
         >
+          {lastSaved && (
+            <Button
+              type="button"
+              onClick={clearDraft}
+              style={{ marginBottom: 0 }}
+            >
+              Clear Draft
+            </Button>
+          )}
+
           {hasPreviousStep && (
             <Button
               onClick={() => setStep(step - 1)}
@@ -177,17 +176,6 @@ export const EmployeeForm = ({ as, defaultValues, onSubmit }: Props) => {
             <form.AppForm>
               <form.SubmitButton label="Save" />
             </form.AppForm>
-          )}
-
-          {/* Clear draft button */}
-          {lastSaved && (
-            <Button
-              type="button"
-              onClick={clearDraft}
-              style={{ marginBottom: 0 }}
-            >
-              Clear Draft
-            </Button>
           )}
         </div>
       </form>

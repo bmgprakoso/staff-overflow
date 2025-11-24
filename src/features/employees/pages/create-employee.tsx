@@ -29,7 +29,7 @@ export const CreateEmployee = () => {
   return (
     <div>
       <Button onClick={onBack}>Back</Button>
-      <h2>{`Add ${role} Employee`}</h2>
+      <h2>Add Employee</h2>
       <EmployeeForm as={role as Role} onSubmit={onSubmit} />
     </div>
   );
