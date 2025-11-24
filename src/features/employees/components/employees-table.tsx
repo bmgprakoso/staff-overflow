@@ -31,10 +31,10 @@ export const EmployeesTable = () => {
           {employees.map((employee) => (
             <tr key={employee.id}>
               <Td>{employee.full_name}</Td>
-              <Td>{employee.department}</Td>
+              <Td>{employee.department.name}</Td>
               <Td>{employee.role}</Td>
-              <Td>{employee.office_location}</Td>
-              <Td>{employee.photo}</Td>
+              <Td>{employee.office_location?.name || "N/A"}</Td>
+              <Td>{employee.photo || "N/A"}</Td>
             </tr>
           ))}
         </tbody>

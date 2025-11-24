@@ -11,7 +11,7 @@
       "employee_id": "ENG-001",
       "full_name": "Dave Gamache",
       "email": "dave@example.com",
-      "department": "Engineering",
+      "department": { "id": 4, "name": "Engineering" },
       "role": "Engineer"
     }
   ]

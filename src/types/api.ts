@@ -16,44 +16,39 @@ export type Entities<T, K extends string> = {
   [key in K]: Entity<T>[];
 } & PaginationMeta;
 
+// Resource Types
 export type Department = Entity<{
-  id: number;
   name: string;
 }>;
 
 export type Location = Entity<{
-  id: number;
   name: string;
 }>;
 
 export type BasicInfo = Entity<{
-  id: string;
   employee_id: string;
   full_name: string;
   email: string;
-  department: string;
+  department: Department;
   role: string;
 }>;
 
-// Resource Types
 export type Details = Entity<{
-  id: string;
   employee_id: string;
   photo?: string;
   employment_type?: string;
-  office_location?: string;
+  office_location?: Location;
   notes?: string;
 }>;
 
 export type Employee = Entity<{
-  id: string;
   full_name: string;
   email: string;
-  department: string;
+  department: Department;
   role: string;
   photo?: string;
   employment_type?: string;
-  office_location?: string;
+  office_location?: Location;
   notes?: string;
 }>;
 

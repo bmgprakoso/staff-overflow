@@ -10,7 +10,7 @@
       "employee_id": "ENG-001",
       "photo": "https://via.placeholder.com/150",
       "employment_type": "Full-time",
-      "office_location": "Jakarta",
+      "office_location": { "id": 1, "name": "Jakarta" },
       "notes": "lorem ipsum"
     }
   ]
