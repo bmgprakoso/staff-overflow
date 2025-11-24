@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-export const Textarea = () => styled.textarea`
+export const Textarea = styled.textarea`
   height: 38px;
   padding: 6px 10px;
   background-color: #fff;

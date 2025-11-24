@@ -1,9 +1,7 @@
-import { Label } from "@/components/ui/form";
 import { Grid, GridItem } from "@/components/ui/grid";
-import { DepartmentAutocomplete } from "./department-autocomplete";
 import { withForm } from "@/forms";
 import { formOpts } from "../data/shared-form";
-import { EmployeeIdField } from "./employee-id-field";
+import { useLocations } from "../api/get-locations";
 
 export const DetailStep = withForm({
   ...formOpts,
@@ -13,43 +11,35 @@ export const DetailStep = withForm({
         <Grid cols={2}>
           <GridItem>
             <form.AppField
-              name="full_name"
-              children={(field) => (
-                <field.TextField label="Full Name" type="text" required />
-              )}
-            />
-          </GridItem>
-
-          <GridItem>
-            <form.AppField
-              name="email"
-              children={(field) => (
-                <field.TextField label="Email" type="email" required />
-              )}
-            />
-          </GridItem>
-
-          <GridItem>
-            <Label htmlFor="department">Department</Label>
-            <DepartmentAutocomplete />
-          </GridItem>
-
-          <GridItem>
-            <form.AppField
-              name="role"
+              name="employment_type"
               children={(field) => (
                 <field.SelectField
-                  label="Role"
-                  placeholder="Select Role"
-                  options={["Ops", "Admin", "Engineer", "Finance"]}
-                  required
+                  label="Employment Type"
+                  placeholder="Select Employment Type"
+                  options={["Full-time", "Part-time", "Contract", "Intern"]}
                 />
               )}
             />
           </GridItem>
 
           <GridItem>
-            <EmployeeIdField form={form} />
+            <form.AppField
+              name="office_location"
+              children={(field) => (
+                <field.AutocompleteField
+                  label="Office Location"
+                  useQuery={useLocations}
+                  placeholder="Search locations..."
+                />
+              )}
+            />
+          </GridItem>
+
+          <GridItem>
+            <form.AppField
+              name="notes"
+              children={(field) => <field.TextareaField label="Notes" />}
+            />
           </GridItem>
         </Grid>
       </div>
