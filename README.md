@@ -19,6 +19,4 @@ docker-compose up -d
 
 ## Hosted demo Url
 
-Coming soon
-
-## Testing Notes
+[Netlify](https://staff-overflow.netlify.app/)
