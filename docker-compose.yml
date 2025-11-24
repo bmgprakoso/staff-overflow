@@ -1,5 +1,4 @@
 version: "3.8"
-
 services:
   frontend:
     build:
@@ -8,14 +7,13 @@ services:
     ports:
       - "4000:4000"
     environment:
-      - VITE_JSON_SERVER_1=http://localhost:4001
-      - VITE_JSON_SERVER_2=http://localhost:4002
+      - VITE_JSON_SERVER_1=http://json-server-1:80
+      - VITE_JSON_SERVER_2=http://json-server-2:80
     depends_on:
       - json-server-1
       - json-server-2
     networks:
       - app-network
-
   json-server-1:
     image: clue/json-server
     ports:
@@ -24,7 +22,6 @@ services:
       - ./db-step1.json:/data/db.json
     networks:
       - app-network
-
   json-server-2:
     image: clue/json-server
     ports:
@@ -33,7 +30,6 @@ services:
       - ./db-step2.json:/data/db.json
     networks:
       - app-network
-
 networks:
   app-network:
     driver: bridge
