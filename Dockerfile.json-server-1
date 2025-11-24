@@ -1,2 +1,0 @@
-FROM clue/json-server
-COPY db-step1.json /data/db.json
