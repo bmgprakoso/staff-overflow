@@ -31,6 +31,9 @@ export const EmployeeForm = ({ as, defaultValues, onSubmit }: Props) => {
   });
 
   const role = useStore(form.store, (state) => state.values.role);
+  const isValid = useStore(form.store, (state) => state.isValid);
+  const isDirty = useStore(form.store, (state) => state.isDirty);
+  const disableNextButton = !isValid || !isDirty;
 
   const employeesQuery = useEmployees({
     page: DefaultPage,
@@ -78,7 +81,11 @@ export const EmployeeForm = ({ as, defaultValues, onSubmit }: Props) => {
           </Button>
         )}
         {hasNextStep && (
-          <Button onClick={() => setStep(step + 1)} style={{ marginBottom: 0 }}>
+          <Button
+            onClick={() => setStep(step + 1)}
+            style={{ marginBottom: 0 }}
+            disabled={disableNextButton}
+          >
             Next
           </Button>
         )}
